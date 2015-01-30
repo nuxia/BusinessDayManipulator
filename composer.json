@@ -1,0 +1,28 @@
+{
+  "name": "nuxia/business-day-manipulator",
+  "description": "Business Day Manipulator",
+  "keywords": ["Working Day", "Business Day", "Manipulator"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Johann Saunier",
+      "email": "johann_27@hotmail.fr"
+    }
+  ],
+  "require":
+  {
+    "php": ">=5.4"
+  },
+  "autoload": {
+    "psr-4": { "Nuxia\\BusinessDayManipulator\\": "/src" }
+  },
+  "suggest": {
+    "intl": "Required to use localized manipulator"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
