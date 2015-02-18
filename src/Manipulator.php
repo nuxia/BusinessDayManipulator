@@ -329,10 +329,10 @@ class Manipulator implements ManipulatorInterface
 
         $date = clone $this->startDate; //Break reference
 
-        while ($date <= $this->endDate) {
+        while ($date < $this->endDate) {
             $date->modify('+1 day');
             if ($this->isBusinessDay($date)) {
-                $dates[] = $date;
+                $dates[] = clone $date;
             }
         }
 

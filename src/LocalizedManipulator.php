@@ -84,7 +84,11 @@ class LocalizedManipulator implements ManipulatorInterface
      */
     public function setStartDate(\DateTime $startDate)
     {
+        $startDate->setTimezone(new \DateTimeZone($this->tz));
+
         $this->manipulator->setStartDate($startDate);
+
+        return $this;
     }
 
     /**
@@ -92,7 +96,7 @@ class LocalizedManipulator implements ManipulatorInterface
      */
     public function addHoliday($holiday)
     {
-        $this->manipulator->addHoliday($holiday);
+        return $this->manipulator->addHoliday($holiday);
     }
 
     /**
@@ -100,7 +104,7 @@ class LocalizedManipulator implements ManipulatorInterface
      */
     public function addFreeDay($freeDay)
     {
-        $this->manipulator->addFreeDay($freeDay);
+        return $this->manipulator->addFreeDay($freeDay);
     }
 
     /**
@@ -140,6 +144,8 @@ class LocalizedManipulator implements ManipulatorInterface
      */
     public function setEndDate(\DateTime $date)
     {
+        $date->setTimezone(new \DateTimeZone($this->tz));
+
         $this->manipulator->setEndDate($date);
     }
 
