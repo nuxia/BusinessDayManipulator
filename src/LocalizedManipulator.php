@@ -36,7 +36,7 @@ class LocalizedManipulator implements ManipulatorInterface
      *
      * @throws \Exception
      */
-    public function __construct($tz, $locale, Array $freeDays, Array $freeWeekDays = null, Array $holidays)
+    public function __construct($tz, $locale, Array $freeDays = array(), Array $freeWeekDays = array(), Array $holidays = array())
     {
         if (false === extension_loaded('intl')) {
             throw new \Exception('Intl is not available');
@@ -57,7 +57,7 @@ class LocalizedManipulator implements ManipulatorInterface
 
         $this->manipulator = new Manipulator(
             $freeDays,
-            null === $freeWeekDays ? $this->getFreeWeekDays() : $freeWeekDays,
+            empty($freeWeekDays) ? $this->getFreeWeekDays() : $freeWeekDays,
             $holidays
         );
     }
