@@ -14,8 +14,14 @@
   {
     "php": ">=5.4"
   },
+  "require-dev":{
+    "phpunit/phpunit": "~4.0"
+  },
   "autoload": {
-    "psr-4": { "Nuxia\\BusinessDayManipulator\\": "/src" }
+    "psr-4": { "Nuxia\\BusinessDayManipulator\\": "src" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Nuxia\\BusinessDayManipulator\\Tests\\": "tests" }
   },
   "suggest": {
     "intl": "Required to use localized manipulator"

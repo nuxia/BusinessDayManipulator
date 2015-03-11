@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxia\BusinessDayManipulator\src;
+namespace Nuxia\BusinessDayManipulator;
 
 /**
  * @author Johann Saunier <johann_27@hotmail.fr>
@@ -15,8 +15,9 @@ interface WorkingDayDatePredicatorInterface
     public function setStartDate(\DateTime $startDate);
 
     /**
-     * @param  int    $howManyDays
-     * @param  string $strategy
+     * @param int    $howManyDays
+     * @param string $strategy
+     *
      * @return $this
      */
     public function addBusinessDays($howManyDays, $strategy = Manipulator::EXCLUDE_TODAY);

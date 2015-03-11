@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxia\BusinessDayManipulator\src;
+namespace Nuxia\BusinessDayManipulator;
 
 /**
  * @author Johann Saunier <johann_27@hotmail.fr>

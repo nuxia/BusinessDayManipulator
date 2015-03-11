@@ -1,6 +1,6 @@
 <?php
 
-namespace Nuxia\BusinessDayManipulator\src;
+namespace Nuxia\BusinessDayManipulator;
 
 /**
  * @author Johann Saunier <johann_27@hotmail.fr>
@@ -34,7 +34,7 @@ class Manipulator implements ManipulatorInterface
      * @param int[]                    $freeWeekDays
      * @param \DateTime[]|DatePeriod[] $holidays
      */
-    public function __construct(Array $freeDays, Array $freeWeekDays, Array $holidays)
+    public function __construct(Array $freeDays = array(), Array $freeWeekDays = array(), Array $holidays = array())
     {
         $this->startDate = new \DateTime();
         $this->cursorDate = new \DateTime();
@@ -164,6 +164,8 @@ class Manipulator implements ManipulatorInterface
         }
 
         $this->freeWeekDays[] = $freeWeekDay;
+
+        return $this;
     }
 
     /**
@@ -312,7 +314,7 @@ class Manipulator implements ManipulatorInterface
     public function setEndDate(\DateTime $endDate)
     {
         if ($endDate <= $this->startDate) {
-            throw new \Exception('endDate must after your starting date');
+            throw new \LogicException('endDate must after your starting date');
         }
 
         $this->endDate = clone $endDate; //Break reference
@@ -329,11 +331,18 @@ class Manipulator implements ManipulatorInterface
 
         $date = clone $this->startDate; //Break reference
 
+        $iteration = 0;
+
         while ($date < $this->endDate) {
-            $date->modify('+1 day');
+            if (0 != $iteration) {
+                $date->modify('+1 day');
+            }
+
             if ($this->isBusinessDay($date)) {
                 $dates[] = clone $date;
             }
+
+            $iteration++;
         }
 
         return $dates;
