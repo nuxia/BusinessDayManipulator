@@ -5,7 +5,7 @@
 
 ## Simple Manipulator
 ```php
-use Nuxia\BusinessDayManipulator\src\Manipulator;
+use Nuxia\BusinessDayManipulator\Manipulator;
 
 $holidays = [
     new DatePeriod(new \DateTime('2015-02-02'), new \DateTime('2015-02-06')),
@@ -31,7 +31,7 @@ $manipulator = new Manipulator($freeDays, $freeWeekDays, $holidays);
 ## Localized Manipulator
 
 ```php
-use Nuxia\BusinessDayManipulator\src\LocalizedManipulator;
+use Nuxia\BusinessDayManipulator\LocalizedManipulator;
 
 $holidays = [
     new DatePeriod(new \DateTime('2015-02-02'), new \DateTime('2015-02-06')),
@@ -74,9 +74,11 @@ $manipulator->isBusinessDay(new \DateTime('2015-02-08')); //false
 ```php
 $manipulator->getTypeOfDay(new \DateTime('2015-02-08')); // free_week_day
 ```
+## Running test
+
+Simply run `phpunit` to execute unit test
 
 ## License
-
 ```txt
 The MIT License (MIT)
 
