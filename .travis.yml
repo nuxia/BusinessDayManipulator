@@ -16,7 +16,7 @@ before_script:
     - COMPOSER_ROOT_VERSION=dev-master composer --prefer-source --dev install
 
 script:
-    - phpunit -c phpunit.xml.dist --coverage-text
+    - phpunit -c phpunit.xml --coverage-text
 
 notifications:
     email:
