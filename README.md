@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nuxia/BusinessDayManipulator.svg?branch=master)](https://travis-ci.org/nuxia/BusinessDayManipulator)
+
 # Manipulate easily working days
 
 * Find number of working days for a period.
