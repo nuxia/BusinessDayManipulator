@@ -329,6 +329,11 @@ class Manipulator implements ManipulatorInterface
     {
         $dates = [];
 
+        if($this->startDate == $this->endDate){
+            $dates[] = clone $this->startDate;
+            return $dates;
+        }
+
         $date = clone $this->startDate; //Break reference
 
         $iteration = 0;

@@ -217,16 +217,17 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($unreferencedDate, \PHPUnit_Framework_Assert::readAttribute($manipulator, 'endDate')->format('Y-m-d h:i:s'));
     }
 
-    public function testPredicatorOneDay()
+    public function testPredicatorWithSameDay()
     {
         $manipulator = new Manipulator();
 
-        $oneDay = new \DateTime('2015-05-13');
+        $day = new \DateTime('2015-05-13');
 
-        $manipulator->setStartDate($oneDay);
-        $manipulator->setEndDate($oneDay);
+        $manipulator->setStartDate($day);
+        $manipulator->setEndDate($day);
 
         $this->assertEquals(1, $manipulator->getBusinessDays());
+        $this->assertEquals([$day], $manipulator->getBusinessDaysDate());
     }
 
     public function testPredicatorException()
