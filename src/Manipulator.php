@@ -313,7 +313,7 @@ class Manipulator implements ManipulatorInterface
      */
     public function setEndDate(\DateTime $endDate)
     {
-        if ($endDate <= $this->startDate) {
+        if ($endDate < $this->startDate) {
             throw new \LogicException('endDate must after your starting date');
         }
 

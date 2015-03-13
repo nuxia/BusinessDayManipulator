@@ -79,7 +79,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-04-02'),
         ];
 
-        $manipulator = new Manipulator($freeDays, [], []);
+        $manipulator = new Manipulator($freeDays);
 
         $this->assertEquals($expected, \PHPUnit_Framework_Assert::readAttribute($manipulator, 'freeDays'));
     }
@@ -108,7 +108,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
             Manipulator::SUNDAY,
         ];
 
-        $manipulator = new Manipulator([], $freeWeekDays, []);
+        $manipulator = new Manipulator([], $freeWeekDays);
 
         $this->assertEquals($freeWeekDays, \PHPUnit_Framework_Assert::readAttribute($manipulator, 'freeWeekDays'));
     }
@@ -124,7 +124,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAddBusinessDays()
     {
-        $manipulator = new Manipulator([], [], []);
+        $manipulator = new Manipulator();
 
         $manipulator->setStartDate(new \DateTime());
         $manipulator->addBusinessDays(5);
@@ -215,6 +215,28 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
         //Check the interval date is not passed by reference. When we modify the original object, we don't want modify the date passed in Manipulator
         $endDate->add(new \DateInterval('P1M'));
         $this->assertEquals($unreferencedDate, \PHPUnit_Framework_Assert::readAttribute($manipulator, 'endDate')->format('Y-m-d h:i:s'));
+    }
+
+    public function testPredicatorOneDay()
+    {
+        $manipulator = new Manipulator();
+
+        $oneDay = new \DateTime('2015-05-13');
+
+        $manipulator->setStartDate($oneDay);
+        $manipulator->setEndDate($oneDay);
+
+        $this->assertEquals(1, $manipulator->getBusinessDays());
+    }
+
+    public function testPredicatorException()
+    {
+        $this->setExpectedException('LogicException');
+
+        $manipulator = new Manipulator();
+
+        $manipulator->setStartDate(new \DateTime('2015-04-02'));
+        $manipulator->setEndDate(new \DateTime('2015-04-01'));
     }
 
     public function testGetBusinessDays()
