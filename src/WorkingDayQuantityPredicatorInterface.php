@@ -49,4 +49,9 @@ interface WorkingDayQuantityPredicatorInterface
      * @return $this
      */
     public function addHoliday($holiday);
+
+    /**
+     * @return \DateTime[]
+     */
+    public function getNonWorkingDays();
 }

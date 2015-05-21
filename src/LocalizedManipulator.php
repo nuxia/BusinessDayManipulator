@@ -168,6 +168,14 @@ class LocalizedManipulator implements ManipulatorInterface
     /**
      * {@inheritdoc}
      */
+    public function getNonWorkingDays()
+    {
+        return $this->manipulator->getNonWorkingDays();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTypeOfDay(\DateTime $date)
     {
         return $this->manipulator->getTypeOfDay($date);

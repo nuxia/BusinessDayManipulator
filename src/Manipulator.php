@@ -360,4 +360,38 @@ class Manipulator implements ManipulatorInterface
     {
         return count($this->getBusinessDaysDate());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNonWorkingDays()
+    {
+        $start = clone $this->startDate;
+
+        $dates = [];
+
+        if ($this->startDate == $this->endDate) {
+            if (!$this->isBusinessDay($this->startDate)) {
+                $dates[] = $start;
+            }
+
+            return $dates;
+        }
+
+        $iteration = 0;
+
+        while ($start < $this->endDate) {
+            if (0 != $iteration) {
+                $start->modify('+1 day');
+            }
+
+            if (!$this->isBusinessDay($start)) {
+                $dates[] = clone $start;
+            }
+
+            $iteration++;
+        }
+
+        return $dates;
+    }
 }
