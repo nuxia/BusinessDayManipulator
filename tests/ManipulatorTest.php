@@ -269,7 +269,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $manipulator->getBusinessDays());
 
         $manipulator->setStartDate(new \DateTime('2015-04-23'));
-        $manipulator->setEndDate(new \DateTime('2015-04-31'));
+        $manipulator->setEndDate(new \DateTime('2015-05-01'));
         $this->assertEquals(7, $manipulator->getBusinessDays());
     }
 
@@ -327,7 +327,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
         ], $manipulator->getBusinessDaysDate());
 
         $manipulator->setStartDate(new \DateTime('2015-04-23'));
-        $manipulator->setEndDate(new \DateTime('2015-04-31'));
+        $manipulator->setEndDate(new \DateTime('2015-05-01'));
 
         $this->assertEquals([
             new \DateTime('2015-04-23'),
@@ -336,7 +336,7 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-04-28'),
             new \DateTime('2015-04-29'),
             new \DateTime('2015-04-30'),
-            new \DateTime('2015-04-31'),
+            new \DateTime('2015-05-01'),
         ], $manipulator->getBusinessDaysDate());
     }
 
