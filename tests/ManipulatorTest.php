@@ -339,4 +339,73 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-04-31'),
         ], $manipulator->getBusinessDaysDate());
     }
+
+    public function testGetNonWorkingDays()
+    {
+        $freeWeeksDay = [
+            Manipulator::SATURDAY,
+            Manipulator::SUNDAY,
+        ];
+
+        $freeDays = [
+            new \DateTime('2015-04-01'),
+        ];
+
+        $holidays = [
+            new DatePeriod(new \DateTime('2015-04-07'), new \DateTime('2015-04-14')),
+        ];
+
+        $manipulator = new Manipulator($freeDays, $freeWeeksDay, $holidays);
+
+        $manipulator->setStartDate(new \DateTime('2015-04-01'));
+
+        $manipulator->setEndDate(new \DateTime('2015-04-15'));
+
+        $this->assertEquals([
+            new \DateTime('2015-04-01'),
+            new \DateTime('2015-04-04'),
+            new \DateTime('2015-04-05'),
+            new \DateTime('2015-04-07'),
+            new \DateTime('2015-04-08'),
+            new \DateTime('2015-04-09'),
+            new \DateTime('2015-04-10'),
+            new \DateTime('2015-04-11'),
+            new \DateTime('2015-04-12'),
+            new \DateTime('2015-04-13'),
+            new \DateTime('2015-04-14'),
+        ], $manipulator->GetNonWorkingDays());
+
+        $manipulator->setEndDate(new \DateTime('2015-04-30'));
+        $this->assertEquals([
+            new \DateTime('2015-04-01'),
+            new \DateTime('2015-04-04'),
+            new \DateTime('2015-04-05'),
+            new \DateTime('2015-04-07'),
+            new \DateTime('2015-04-08'),
+            new \DateTime('2015-04-09'),
+            new \DateTime('2015-04-10'),
+            new \DateTime('2015-04-11'),
+            new \DateTime('2015-04-12'),
+            new \DateTime('2015-04-13'),
+            new \DateTime('2015-04-14'),
+            new \DateTime('2015-04-18'),
+            new \DateTime('2015-04-19'),
+            new \DateTime('2015-04-25'),
+            new \DateTime('2015-04-26'),
+        ], $manipulator->GetNonWorkingDays());
+
+        $manipulator->setEndDate(new \DateTime('2015-04-03'));
+        $this->assertEquals([
+            new \DateTime('2015-04-01'),
+        ], $manipulator->GetNonWorkingDays());
+
+        $manipulator->setStartDate(new \DateTime('2015-04-23'));
+        $manipulator->setEndDate(new \DateTime('2015-05-01'));
+
+
+        $this->assertEquals([
+            new \DateTime('2015-04-25'),
+            new \DateTime('2015-04-26'),
+        ], $manipulator->GetNonWorkingDays());
+    }
 }
