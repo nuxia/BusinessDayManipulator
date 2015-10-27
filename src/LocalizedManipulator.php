@@ -71,7 +71,14 @@ class LocalizedManipulator implements ManipulatorInterface
         $calendar = \IntlCalendar::createInstance($this->tz, $this->locale);
 
         foreach ($this->intlMapping as $intlDay => $manipulatorDay) {
-            if (1 === $calendar->getDayOfWeekType($intlDay)) {
+            $dayOfWeekType = $calendar->getDayOfWeekType($intlDay);
+            $weekEndTransition = $calendar->getWeekendTransition($intlDay);
+
+            if (
+                \IntlCalendar::DOW_TYPE_WEEKEND === $dayOfWeekType
+                || (\IntlCalendar::DOW_TYPE_WEEKEND_OFFSET === $dayOfWeekType && 0 === $weekEndTransition)
+                || (\IntlCalendar::DOW_TYPE_WEEKEND_CEASE === $dayOfWeekType && 86400000 === $weekEndTransition)
+            ) {
                 $freeWeekDays[] = $manipulatorDay;
             }
         }
