@@ -58,6 +58,12 @@ $manipulator->addBusinessDays(15);
 $manipulator->getDate()->format('Y-m-d'); //2015-03-06
 ```
 
+```php
+$manipulator->setStartDate(new \DateTime('2015-03-06'));
+$manipulator->subBusinessDays(15);
+$manipulator->getDate()->format('Y-m-d'); //2015-02-01
+```
+
 ## Working Day Quantity Predicator
 ```php
 $manipulator->setStartDate(new \DateTime('2015-02-01'));

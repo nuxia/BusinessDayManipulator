@@ -179,12 +179,53 @@ class Manipulator implements ManipulatorInterface
 
         return $this->freeWeekDays;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function subBusinessDays($howManyDays, $strategy = self::EXCLUDE_TODAY)
+    {
+        if ($howManyDays < 1) {
+            throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
+        }
+        
+        $today = new \DateTime();
+
+        if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
+            if (static::EXCLUDE_TODAY === $strategy) {
+                $iterator = -1;
+            } elseif (static::INCLUDE_TODAY === $strategy) {
+                $iterator = 0;
+            } else {
+                throw new \Exception('undefined strategy');
+            }
+        } else {
+            $iterator = 0;
+        }
+
+        while ($iterator < $howManyDays) {
+            if ($this->isBusinessDay($this->cursorDate)) {
+                $iterator++;
+            }
+
+            if ($iterator < $howManyDays) { //Do not modify the date if we are on the last iteration
+                $this->cursorDate->modify('-1 day');
+            }
+        }
+
+        return $this;
+    }
+    
 
     /**
      * {@inheritdoc}
      */
     public function addBusinessDays($howManyDays, $strategy = self::EXCLUDE_TODAY)
     {
+        if ($howManyDays < 1) {
+            throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
+        }
+        
         $today = new \DateTime();
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
