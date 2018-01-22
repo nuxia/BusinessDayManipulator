@@ -5,6 +5,14 @@
 * Find number of working days for a period.
 * Find the ending date by adding the man day quantity to the starting date
 
+## Install
+
+* If you're using Composer to manage dependencies, you can use
+
+```sh
+composer require nuxia/business-day-manipulator
+```
+
 ## Simple Manipulator
 ```php
 use Nuxia\BusinessDayManipulator\Manipulator;
