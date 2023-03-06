@@ -422,4 +422,36 @@ class ManipulatorTest extends \PHPUnit_Framework_TestCase
             new \DateTime('2015-04-26'),
         ], $manipulator->GetNonWorkingDays());
     }
+
+    public function testGetBusinessDaysWithDifferentTimezone()
+    {
+        $manipulator = new Manipulator();
+
+        $date = new \DateTime();
+
+        $manipulator->setStartDate($date);
+        $manipulator->addBusinessDays(5);
+
+        $this->assertEquals($date->modify('+5 day'), $manipulator->getDate());
+
+        $manipulator = new Manipulator();
+
+
+        $date = new \DateTime('now', new \DateTimeZone('America/Los_Angeles'));
+
+        $manipulator->setStartDate($date);
+        $manipulator->addBusinessDays(5);
+
+        $this->assertEquals($date->modify('+5 day'), $manipulator->getDate());
+
+
+        $manipulator = new Manipulator();
+
+        $date = new \DateTime('now', new \DateTimeZone('Asia/Hong_Kong'));
+
+        $manipulator->setStartDate($date);
+        $manipulator->addBusinessDays(5);
+
+        $this->assertEquals($date->modify('+5 day'), $manipulator->getDate());
+    }
 }
