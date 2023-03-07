@@ -189,7 +189,7 @@ class Manipulator implements ManipulatorInterface
             throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
         }
         
-        $today = new \DateTime();
+        $today = new \DateTime('now', $this->cursorDate->getTimezone());
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
             if (static::EXCLUDE_TODAY === $strategy) {
@@ -226,7 +226,7 @@ class Manipulator implements ManipulatorInterface
             throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
         }
         
-        $today = new \DateTime();
+        $today = new \DateTime('now', $this->cursorDate->getTimezone());
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
             if (static::EXCLUDE_TODAY === $strategy) {
