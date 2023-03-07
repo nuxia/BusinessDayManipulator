@@ -185,10 +185,6 @@ class Manipulator implements ManipulatorInterface
      */
     public function subBusinessDays($howManyDays, $strategy = self::EXCLUDE_TODAY)
     {
-        if ($howManyDays < 1) {
-            throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
-        }
-        
         $today = new \DateTime();
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
@@ -222,10 +218,6 @@ class Manipulator implements ManipulatorInterface
      */
     public function addBusinessDays($howManyDays, $strategy = self::EXCLUDE_TODAY)
     {
-        if ($howManyDays < 1) {
-            throw new \InvalidArgumentException('The paramter $howManyDays must be greater than 0');
-        }
-        
         $today = new \DateTime();
 
         if ($today->format('Y-m-d') === $this->cursorDate->format('Y-m-d')) {
